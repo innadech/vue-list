@@ -1,13 +1,11 @@
 <script>
+import PetSubmitter from './components/PetSubmitter.vue'
+
 export default {
+  components: { PetSubmitter },
+
   data() {
     return {
-      newPet: {
-        caption: '',
-        newCaption: '',
-        isEdited: false,
-        id: this.makeId(),
-      },
       pets: [],
     }
   },
@@ -20,27 +18,8 @@ export default {
       }
     },
 
-    submitPet() {
-      if (this.newPet.caption && this.isPetUnique(this.newPet.caption)) {
-        this.newPet.caption = this.newPet.caption.toLowerCase()
-        this.newPet.newCaption = this.newPet.caption
-        this.pets.push(this.newPet)
-        this.newPet = {
-          caption: '',
-          newCaption: '',
-          isEdited: false,
-          id: this.makeId(),
-        }
-        this.$refs.elInput.focus()
-      }
-    },
-
     isPetUnique(petCaption) {
       return !this.pets.find(p => p.caption === petCaption)
-    },
-
-    makeId() {
-      return crypto.randomUUID().split('-').at(0)
     },
 
     removePet(id) {
@@ -82,16 +61,9 @@ export default {
         </button>
       </li>
     </ul>
-    <form>
-      <input
-        ref="elInput"
-        v-bind:value="newPet.caption"
-        v-on:input="newPet.caption = $event.target.value"
-      />
-      <button type="submit" v-on:click.prevent="submitPet">Submit</button>
-    </form>
 
-    <h3><span>newPet: </span>{{ newPet }}</h3>
+    <PetSubmitter v-on:pet-submitted="console.log('hello', $event)" />
+
     <h3><span>pets: </span>{{ pets }}</h3>
   </div>
 </template>
