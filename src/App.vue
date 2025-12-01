@@ -62,7 +62,7 @@ export default {
       </li>
     </ul>
 
-    <PetSubmitter v-on:pet-submitted="console.log('hello', $event)" />
+    <PetSubmitter v-on:pet-submitted="pets.push($event)" />
 
     <h3><span>pets: </span>{{ pets }}</h3>
   </div>

@@ -18,9 +18,7 @@ export default {
       if (this.newPet.caption) {
         this.newPet.caption = this.newPet.caption.toLowerCase()
         this.newPet.newCaption = this.newPet.caption
-
-        // this.pets.push(this.newPet)
-        this.$emit('pet-submitted', 'hi')
+        this.$emit('pet-submitted', this.newPet)
 
         this.newPet = {
           caption: '',
@@ -50,3 +48,21 @@ export default {
     <h3><span>newPet: </span>{{ newPet }}</h3>
   </form>
 </template>
+
+<!-- submitPet() {
+      if (this.newPet.caption) {
+        this.newPet.caption = this.newPet.caption.toLowerCase()
+        this.newPet.newCaption = this.newPet.caption
+
+        // this.pets.push(this.newPet)
+        this.$emit('pet-submitted', 'hi')
+
+        this.newPet = {
+          caption: '',
+          newCaption: '',
+          isEdited: false,
+          id: this.makeId(),
+        }
+        this.$refs.elInput.focus()
+      }
+    }, -->
