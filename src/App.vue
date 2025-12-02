@@ -1,8 +1,9 @@
 <script>
 import PetSubmitter from './components/PetSubmitter.vue'
+import PetList from './components/PetList.vue'
 
 export default {
-  components: { PetSubmitter },
+  components: { PetSubmitter, PetList },
 
   data() {
     return {
@@ -11,9 +12,10 @@ export default {
   },
 
   methods: {
-    updatePet(pet) {
-      if (pet.newCaption && this.isPetUnique(pet.newCaption)) {
-        pet.caption = pet.newCaption.toLowerCase()
+    edited(e) {
+      editedPetCaption = e
+      if (this.isPetUnique(editedPetCaption)) {
+        pet.caption = newPetCaption.newCaption.toLowerCase()
         pet.isEdited = false
       }
     },
@@ -21,9 +23,11 @@ export default {
     isPetUnique(petCaption) {
       return !this.pets.find(p => p.caption === petCaption)
     },
-
-    removePet(id) {
-      this.pets = this.pets.filter(p => p.id !== id)
+    submit(e) {
+      const newPet = e
+      if (this.isPetUnique(newPet.caption)) {
+        this.pets.push(newPet)
+      }
     },
   },
 }
@@ -32,37 +36,9 @@ export default {
 <template>
   <div class="p-5">
     <h3>Pets</h3>
-    <ul>
-      <li v-for="(pet, idx) of pets" :key="pet">
-        <div v-if="pet.isEdited" class="d-inline-block">
-          <input
-            v-bind:value="pet.newCaption"
-            v-on:input="pet.newCaption = $event.target.value"
-          />
-          <button v-on:click="updatePet(pet)">OK</button>
-        </div>
-        <span v-if="!pet.isEdited">
-          {{ pet.caption }}
-          <button
-            v-on:click="pet.isEdited = true"
-            type="button"
-            class="btn btn-secondary btn-sm ms-3"
-          >
-            Edit
-          </button>
-        </span>
-
-        <button
-          type="button"
-          class="btn btn-secondary btn-sm ms-3"
-          v-on:click="removePet(pet.id)"
-        >
-          Delete
-        </button>
-      </li>
-    </ul>
-
-    <PetSubmitter v-on:pet-submitted="pets.push($event)" />
+    <PetList v-bind:pets="pets" v-on:pets-edited="edited" />
+    <PetList v-bind:pets="pets" v-on:pets-removed="pets = $event" />
+    <PetSubmitter v-on:pet-submitted="submit" />
 
     <h3><span>pets: </span>{{ pets }}</h3>
   </div>
