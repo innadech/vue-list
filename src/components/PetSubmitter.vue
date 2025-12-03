@@ -4,12 +4,7 @@ export default {
 
   data() {
     return {
-      newPet: {
-        caption: '',
-        newCaption: '',
-        isEdited: false,
-        id: this.makeId(),
-      },
+      newPet: this.initPet(),
     }
   },
 
@@ -17,16 +12,17 @@ export default {
     submitPet() {
       if (this.newPet.caption) {
         this.newPet.caption = this.newPet.caption.toLowerCase()
-        this.newPet.newCaption = this.newPet.caption
-        this.$emit('pet-submitted', this.newPet)
-
-        this.newPet = {
-          caption: '',
-          newCaption: '',
-          isEdited: false,
-          id: this.makeId(),
-        }
+        this.$emit('pet-submitted', { ...this.newPet })
+        this.newPet = this.initPet()
         this.$refs.elInput.focus()
+      }
+    },
+
+    initPet() {
+      return {
+        id: this.makeId(),
+        caption: '',
+        isEdited: false,
       }
     },
 
@@ -48,21 +44,3 @@ export default {
     <h3><span>newPet: </span>{{ newPet }}</h3>
   </form>
 </template>
-
-<!-- submitPet() {
-      if (this.newPet.caption) {
-        this.newPet.caption = this.newPet.caption.toLowerCase()
-        this.newPet.newCaption = this.newPet.caption
-
-        // this.pets.push(this.newPet)
-        this.$emit('pet-submitted', 'hi')
-
-        this.newPet = {
-          caption: '',
-          newCaption: '',
-          isEdited: false,
-          id: this.makeId(),
-        }
-        this.$refs.elInput.focus()
-      }
-    }, -->
