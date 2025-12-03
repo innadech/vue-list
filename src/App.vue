@@ -24,9 +24,14 @@ export default {
 
 <template>
   <div class="p-5">
+    <span>{{ pets }}</span>
     <h3>Pets</h3>
 
-    <PetList v-bind:pets="pets" v-on:pets-removed="pets = $event" />
+    <PetList
+      v-bind:pets="pets"
+      v-on:pets-removed="pets = $event"
+      v-on:pets-edited="pets = $event"
+    />
 
     <PetSubmitter v-on:pet-submitted="submitPet($event)" />
 
