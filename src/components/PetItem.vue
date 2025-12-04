@@ -9,6 +9,12 @@ export default {
       localPet: { ...this.pet },
     }
   },
+  methods: {
+    edit() {
+      this.localPet.isEdited = false
+      this.$emit('pet-edited', this.localPet)
+    },
+  },
 }
 </script>
 
@@ -19,7 +25,7 @@ export default {
         v-bind:value="localPet.caption"
         v-on:input="localPet.caption = $event.target.value"
       />
-      <button v-on:click="$emit('pet-edited', localPet)">OK</button>
+      <button v-on:click="edit">OK</button>
     </div>
     <span v-if="!localPet.isEdited">
       <span>{{ localPet.caption }}</span>
