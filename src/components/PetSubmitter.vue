@@ -22,7 +22,7 @@ export default {
       return {
         id: this.makeId(),
         caption: '',
-        isEdited: false,
+        isEditing: false,
       }
     },
 

@@ -9,10 +9,11 @@ export default {
       localPet: { ...this.pet },
     }
   },
+
   methods: {
     edit() {
-      this.localPet.isEdited = false
-      this.$emit('pet-edited', this.localPet)
+      this.localPet.isEditing = false
+      this.$emit('pet-edited', { ...this.localPet })
     },
   },
 }
@@ -20,17 +21,17 @@ export default {
 
 <template>
   <li class="m-3">
-    <div v-if="localPet.isEdited" class="d-inline-block">
+    <div v-if="localPet.isEditing" class="d-inline-block">
       <input
         v-bind:value="localPet.caption"
         v-on:input="localPet.caption = $event.target.value"
       />
       <button v-on:click="edit">OK</button>
     </div>
-    <span v-if="!localPet.isEdited">
+    <span v-else>
       <span>{{ localPet.caption }}</span>
       <button
-        v-on:click="localPet.isEdited = true"
+        v-on:click="localPet.isEditing = true"
         type="button"
         class="btn btn-secondary btn-sm ms-3"
       >

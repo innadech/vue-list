@@ -1,0 +1,41 @@
+edited = отредактирован (уже отредактирован) был не отредактирован а теперь отредактирован
+editing = редактируется (в данный момент находится в процессе редактирования) можно редактировать
+edit = редактировать (глагол)
+
+editPet() - [функция] редактировать пета
+pet.isEdited - [булеан] пет уже отредактирован
+pet.isEditing - [булеан] пет редактируется прямо сейчас
+pet.isEditable - [булеан] есть возможность отредактировать
+
+const pet = {
+  name: 'Jack',
+  isEditable: false,
+  isEditing: false,
+  isEdited: true,
+}
+
+const pet = {
+  name: 'Jack',
+  isEditable: false,
+  isEditing: true, ??
+  isEdited: false,
+}
+
+const pet = {
+  name: 'Jack',
+  isEditable: true,
+  isEditing: false,
+  isEdited: false,
+}
+
+
+
+{
+  id: 33,
+  caption: 'Jack',
+  isEditing: true,
+  id: 42,
+  caption: 'Bobik',
+  isEditing: false,
+  isEditing: true,
+}

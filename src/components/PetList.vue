@@ -16,9 +16,21 @@ export default {
       )
     },
     updatePet(pet) {
-      if (!pet) return
+      // const updated = this.pets.map(p =>
+      //   p.id === pet.id ? { ...p, ...pet, isEditing: true } : p
+      // )
       const updated = this.pets.map(p =>
-        p.id === pet.id ? { ...p, ...pet, isEdited: true } : p
+        p.id === pet.id
+          ? {
+              id: p.id,
+              caption: p.caption,
+              isEditing: p.isEditing,
+              id: pet.id,
+              caption: pet.caption,
+              isEditing: pet.isEditing,
+              isEditing: true,
+            }
+          : p
       )
       this.$emit('pets-edited', updated)
     },
@@ -42,7 +54,7 @@ export default {
       if (pet) {
         this.$emit('pets-edited', {
           caption: pet,
-          isEdited: false,
+          isEditing: false,
         })
       }
     }, -->
@@ -58,7 +70,7 @@ p.id === pet.id
 Если ID совпали, значит, это тот объект, который нужно заменить.
 
 4. Если совпали — создаём обновлённый объект
-? { ...p, ...pet, isEdited: false }
+? { ...p, ...pet, isEditing: false }
 получаете объединённый объект, где свойства нового объекта pet заменяют старые.
 
 5. Если ID не совпали, возвращаем элемент как есть
