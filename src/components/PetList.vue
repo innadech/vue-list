@@ -16,22 +16,7 @@ export default {
       )
     },
     updatePet(pet) {
-      // const updated = this.pets.map(p =>
-      //   p.id === pet.id ? { ...p, ...pet, isEditing: true } : p
-      // )
-      const updated = this.pets.map(p =>
-        p.id === pet.id
-          ? {
-              id: p.id,
-              caption: p.caption,
-              isEditing: p.isEditing,
-              id: pet.id,
-              caption: pet.caption,
-              isEditing: pet.isEditing,
-              isEditing: true,
-            }
-          : p
-      )
+      const updated = this.pets.map(p => (p.id === pet.id ? pet : p))
       this.$emit('pets-edited', updated)
     },
   },
